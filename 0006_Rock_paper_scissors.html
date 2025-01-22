@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock paper scissors</title>
+        <style>
+            p{
+                color: white;
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 40px;
+            }
+            .resetB{
+                height: 30px;
+                margin: 10px;
+            }
+            body{
+                background-color: black;
+            }
+            .track p{
+                display: inline-block;
+                margin:10px;
+            }
+            .option button{
+                height :200px;
+                width: 200px;
+                border-radius: 50%;
+                font-family: 'Times New Roman', Times, serif;
+                color: yellow;
+                background-color: black;
+                border-color: white;
+                border-width: 5px;
+                border-style: solid;
+                margin:20px;
+                cursor: pointer;
+            }
+            .option button:hover{
+                background-color: rgba(30 30 30);
+            }
+            .option button img{
+                height: 70px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Rock Paper Scissors</p>
+        <div class="option">
+            <button onclick="
+            result('rock')"><img src="https://supersimple.dev/projects/rock-paper-scissors/images/rock-emoji.png"></button>
+            <button onclick="
+            result('paper')"><img src="https://supersimple.dev/projects/rock-paper-scissors/images/paper-emoji.png"></button>
+            <button onclick="
+            result('scissors')"><img src="	https://supersimple.dev/projects/rock-paper-scissors/images/scissors-emoji.png"></button>
+        </div>
+        <p id="Win"></p>
+        <p style="margin-bottom: 0;">Track:</p>
+        <div class="track">
+            <p id="Win Rec"> </p>
+            <p id="loss Rec"> </p>
+            <p id="Tie Rec"> </p>
+        </div>
+        <button class="resetB" onclick="
+            resetScore()
+        ">Reset Score</button>
+        <script>
+            const record ={
+                win : 0,
+                loss: 0,
+                tie : 0,
+            };
+            function display(a,b,c){
+                if(c==='win')record.win++;
+                if(c==='lose')record.loss++;
+                if(c==='tied with pc')record.tie++;
+                // alert(`You picked ${a}. Computer picked ${b}. You ${c}.
+                // Win: ${record.win}, Loss: ${record.loss}, Ties: ${record.tie}`);
+                document.getElementById("Win Rec").innerHTML = `Wins: ${record.win}`;
+                document.getElementById("loss Rec").innerHTML = `Loses: ${record.loss}`;
+                document.getElementById("Tie Rec").innerHTML = `Ties: ${record.tie}`;
+                document.getElementById("Win").innerHTML = `${c}`;
+            }
+            function resetScore() {
+                record.win = 0;
+                record.loss = 0;
+                record.tie = 0;
+                document.getElementById("Win Rec").innerHTML = `Wins: ${record.win}`;
+                document.getElementById("loss Rec").innerHTML = `Loses: ${record.loss}`;
+                document.getElementById("Tie Rec").innerHTML = `Ties: ${record.tie}`;
+                document.getElementById("Win").innerHTML = `Result`;
+            }
+
+            function result(clk){
+                let num=Math.random();
+                let res='';
+                if(num<(1/3)){
+                    res='rock';
+                }  
+                else if(num<2/3)
+                    res='paper';
+                else
+                    res='scissors';
+                if(clk==='rock'){
+                    if(res==='rock')display(clk,res,'tied with pc');
+                    else if(res==='paper')display(clk,res,'lose');
+                    else display(clk,res,'win');
+                }
+                if(clk==='paper'){
+                    if(res==='rock')display(clk,res,'win');
+                    else if(res==='paper')display(clk,res,'tied with pc');
+                    else display(clk,res,'lose');
+                }
+                if(clk==='scissors'){
+                    if(res==='rock')display(clk,res,'lose');
+                    else if(res==='paper')display(clk,res,'win');
+                    else display(clk,res,'tied with pc');
+                }
+            }
+            document.getElementById("Win Rec").innerHTML = `Wins: ${record.win}`;
+            document.getElementById("loss Rec").innerHTML = `Loses: ${record.loss}`;
+            document.getElementById("Tie Rec").innerHTML = `Ties: ${record.tie}`;
+            document.getElementById("Win").innerHTML = `Result`;
+        </script>
+    </body>
+    
+</html>
